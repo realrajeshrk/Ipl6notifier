@@ -10,4 +10,5 @@ Steps to run
 5. Don't forget to add country code ex: +1(US) +91(INDIA) in FROM and TO
 6. Replace account sid and token from credentials you got in twilio
 7. Install essential packages from pip - pip install playwright and pip install twilio
-7. You are all set, run the script from terminal by command - python ipl6notifier.py 
+8. Update the match url in the code
+9. You are all set, run the script from terminal by command - python ipl6notifier.py 

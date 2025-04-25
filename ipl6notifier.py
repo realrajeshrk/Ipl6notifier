@@ -9,7 +9,7 @@ client = Client(account_sid, auth_token)
 FROM = '+1xxxxxxxxx' 
 TO = '+9xxxxxxxxxx'  
 
-#Replace with match url
+#Replace with match url : dont forget to update match url
 CRICBUZZ_URL = 'https://www.cricbuzz.com/live-cricket-scores/115230'
 
 last_six_ball = ""
@@ -30,9 +30,9 @@ def check_for_six(page):
 
     for p in six_lines:
         text = p.inner_text().strip()
-        print(text);
         if "six" in text.lower() and text != last_sent:
             last_sent = text
+            text = "A six has been hit, you can order now at swiggy" + text;
             return text
         else:
             last_sent = text
@@ -48,8 +48,6 @@ with sync_playwright() as p:
             send_message(msg)
             time.sleep(30)
         else:
-            msg = "not a 6"
-            print("Not a 6 run")
             time.sleep(30)
 
     
