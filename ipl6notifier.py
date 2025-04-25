@@ -1,18 +1,22 @@
-from playwright.sync_api 
-import sync_playwright
+from playwright.sync_api import sync_playwright
 import time
+from twilio.rest import Client
 
+account_sid = 'YOUR_TWILIO_SID'
+auth_token = 'YOUR_TWILIO_TOKEN'
+client = Client(account_sid, auth_token)
 
-FROM = 'whatsapp:+14155238886' 
-TO = 'whatsapp:+91YOURNUMBER'  
+FROM = '+1xxxxxxxxx' 
+TO = '+9xxxxxxxxxx'  
 
-CRICBUZZ_URL = 'https://www.cricbuzz.com/live-cricket-scores/115230/rcb-vs-rr-42nd-match-indian-premier-league-2025'
+#Replace with match url
+CRICBUZZ_URL = 'https://www.cricbuzz.com/live-cricket-scores/115230'
 
 last_six_ball = ""
 
 def send_message(message):
-    # client.messages.create(body=message, from_=FROM, to=TO)
-    # message logic need to implement
+    msg = client.messages.create(body=message, from_=FROM, to=TO)
+    print(msg.sid)
     print("6 runs hit:", message)
 
 def check_for_six(page):
@@ -44,6 +48,7 @@ with sync_playwright() as p:
             send_message(msg)
             time.sleep(30)
         else:
+            msg = "not a 6"
             print("Not a 6 run")
             time.sleep(30)
 
